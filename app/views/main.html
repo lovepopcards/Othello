@@ -1,0 +1,39 @@
+
+<div class="scroll-left">
+  <p>It is just a game, do not cheat, do not yell, stay friends at the end! And HAVE FUN :)</p>
+</div>
+
+<!--Enter names before the game-->
+<!--<div class="player">-->
+  <!--<div ng-if="isStart===false">-->
+  <!--You can enter player names here:<br>-->
+    <!--<form novalidate class="GameFrm">-->
+    <!--<input type="text" name="name1" ng-model="player.name1" value="Player1" required placeholder="Player1">-->
+    <!--<input type="text" name="name2" ng-model="player.name2" value="Player2" required placeholder="Player1"><br>-->
+      <!--<input type="submit" ng-click="startGame(player)" class="btnStart" value="Start!" />-->
+    <!--</form>-->
+  <!--</div>-->
+  <!--<div ng-if="isStart===true">-->
+    <!--<span ng-class=turn>{{turn}}</span>, it's your turn.<br>-->
+    <!--Light: {{scoreLight}} // Dark: {{scoreDark}}-->
+  <!--</div>-->
+<!--</div>-->
+
+<!--Display turn and score-->
+<div class="player">
+  player <span ng-class=turn>{{turn}}</span>, it's your turn.<br>
+  Player Light: {{scoreLight}}<span ng-if="scoreLight>scoreDark">, you're winning</span> <br>
+  Player Dark: {{scoreDark}}<span ng-if="scoreDark>scoreLight">, you're winning</span>
+
+</div>
+
+<!--Building a grid 8x8-->
+  <div ng-repeat="row in rows" class="rows">
+    <div ng-repeat="column in columns" class="columns" id="{{row}}{{column}}" ng-click="move(row,column)">
+      <div ng-if="Piece[row][column]==='dark'" class="piece dark"></div>
+      <div ng-if="Piece[row][column]==='light'" class="piece light"></div>
+    </div>
+  </div>
+
+<!--restart the game-->
+<input type="submit" ng-click="startGame()" class="btnStart" value="Restart" />

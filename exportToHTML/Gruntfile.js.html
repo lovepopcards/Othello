@@ -1,0 +1,507 @@
+<html>
+<head>
+<title>Gruntfile.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: #f8f8f2; font-weight: normal; font-style: normal; }
+.s0 { color: rgb(117,113,94); }
+.s1 { color: rgb(248,248,242); }
+.s2 { color: rgb(230,219,116); }
+.s3 { color: rgb(204,120,50); }
+.s4 { color: rgb(249,38,114); }
+.s5 { color: rgb(174,129,255); }
+</style>
+</head>
+<BODY BGCOLOR="#272822">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+Gruntfile.js</FONT>
+</center></TD></TR></TABLE>
+<pre>
+<span class="s0">// Generated on 2017-09-25 using generator-angular 0.15.1</span><span class="s1"> 
+</span><span class="s2">'use strict'</span><span class="s3">;</span><span class="s1"> 
+ 
+</span><span class="s0">// # Globbing</span><span class="s1"> 
+</span><span class="s0">// for performance reasons we're only matching one level down:</span><span class="s1"> 
+</span><span class="s0">// 'test/spec/{,*/}*.js'</span><span class="s1"> 
+</span><span class="s0">// use this if you want to recursively match all subfolders:</span><span class="s1"> 
+</span><span class="s0">// 'test/spec/**/*.js'</span><span class="s1"> 
+ 
+module.exports </span><span class="s4">= function </span><span class="s1">(grunt) { 
+ 
+  </span><span class="s0">// Time how long tasks take. Can help when optimizing build times</span><span class="s1"> 
+  require(</span><span class="s2">'time-grunt'</span><span class="s1">)(grunt)</span><span class="s3">;</span><span class="s1"> 
+ 
+  </span><span class="s0">// Automatically load required Grunt tasks</span><span class="s1"> 
+  require(</span><span class="s2">'jit-grunt'</span><span class="s1">)(grunt</span><span class="s3">, </span><span class="s1">{ 
+    useminPrepare</span><span class="s4">: </span><span class="s2">'grunt-usemin'</span><span class="s3">,</span><span class="s1"> 
+    ngtemplates</span><span class="s4">: </span><span class="s2">'grunt-angular-templates'</span><span class="s3">,</span><span class="s1"> 
+    cdnify</span><span class="s4">: </span><span class="s2">'grunt-google-cdn'</span><span class="s1"> 
+  })</span><span class="s3">;</span><span class="s1"> 
+ 
+  </span><span class="s0">// Configurable paths for the application</span><span class="s1"> 
+  </span><span class="s4">var </span><span class="s1">appConfig </span><span class="s4">= </span><span class="s1">{ 
+    app</span><span class="s4">: </span><span class="s1">require(</span><span class="s2">'./bower.json'</span><span class="s1">).appPath </span><span class="s4">|| </span><span class="s2">'app'</span><span class="s3">,</span><span class="s1"> 
+    dist</span><span class="s4">: </span><span class="s2">'dist'</span><span class="s1"> 
+  }</span><span class="s3">;</span><span class="s1"> 
+ 
+  </span><span class="s0">// Define the configuration for all the tasks</span><span class="s1"> 
+  grunt.initConfig({ 
+ 
+    </span><span class="s0">// Project settings</span><span class="s1"> 
+    yeoman</span><span class="s4">: </span><span class="s1">appConfig</span><span class="s3">,</span><span class="s1"> 
+ 
+    </span><span class="s0">// Watches files for changes and runs tasks based on the changed files</span><span class="s1"> 
+    watch</span><span class="s4">: </span><span class="s1">{ 
+      bower</span><span class="s4">: </span><span class="s1">{ 
+        files</span><span class="s4">: </span><span class="s1">[</span><span class="s2">'bower.json'</span><span class="s1">]</span><span class="s3">,</span><span class="s1"> 
+        tasks</span><span class="s4">: </span><span class="s1">[</span><span class="s2">'wiredep'</span><span class="s1">] 
+      }</span><span class="s3">,</span><span class="s1"> 
+      js</span><span class="s4">: </span><span class="s1">{ 
+        files</span><span class="s4">: </span><span class="s1">[</span><span class="s2">'&lt;%= yeoman.app %&gt;/scripts/{,*/}*.js'</span><span class="s1">]</span><span class="s3">,</span><span class="s1"> 
+        tasks</span><span class="s4">: </span><span class="s1">[</span><span class="s2">'newer:jshint:all'</span><span class="s3">, </span><span class="s2">'newer:jscs:all'</span><span class="s1">]</span><span class="s3">,</span><span class="s1"> 
+        options</span><span class="s4">: </span><span class="s1">{ 
+          livereload</span><span class="s4">: </span><span class="s2">'&lt;%= connect.options.livereload %&gt;'</span><span class="s1"> 
+        } 
+      }</span><span class="s3">,</span><span class="s1"> 
+      jsTest</span><span class="s4">: </span><span class="s1">{ 
+        files</span><span class="s4">: </span><span class="s1">[</span><span class="s2">'test/spec/{,*/}*.js'</span><span class="s1">]</span><span class="s3">,</span><span class="s1"> 
+        tasks</span><span class="s4">: </span><span class="s1">[</span><span class="s2">'newer:jshint:test'</span><span class="s3">, </span><span class="s2">'newer:jscs:test'</span><span class="s3">, </span><span class="s2">'karma'</span><span class="s1">] 
+      }</span><span class="s3">,</span><span class="s1"> 
+      styles</span><span class="s4">: </span><span class="s1">{ 
+        files</span><span class="s4">: </span><span class="s1">[</span><span class="s2">'&lt;%= yeoman.app %&gt;/styles/{,*/}*.css'</span><span class="s1">]</span><span class="s3">,</span><span class="s1"> 
+        tasks</span><span class="s4">: </span><span class="s1">[</span><span class="s2">'newer:copy:styles'</span><span class="s3">, </span><span class="s2">'postcss'</span><span class="s1">] 
+      }</span><span class="s3">,</span><span class="s1"> 
+      gruntfile</span><span class="s4">: </span><span class="s1">{ 
+        files</span><span class="s4">: </span><span class="s1">[</span><span class="s2">'Gruntfile.js'</span><span class="s1">] 
+      }</span><span class="s3">,</span><span class="s1"> 
+      livereload</span><span class="s4">: </span><span class="s1">{ 
+        options</span><span class="s4">: </span><span class="s1">{ 
+          livereload</span><span class="s4">: </span><span class="s2">'&lt;%= connect.options.livereload %&gt;'</span><span class="s1"> 
+        }</span><span class="s3">,</span><span class="s1"> 
+        files</span><span class="s4">: </span><span class="s1">[ 
+          </span><span class="s2">'&lt;%= yeoman.app %&gt;/{,*/}*.html'</span><span class="s3">,</span><span class="s1"> 
+          </span><span class="s2">'.tmp/styles/{,*/}*.css'</span><span class="s3">,</span><span class="s1"> 
+          </span><span class="s2">'&lt;%= yeoman.app %&gt;/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'</span><span class="s1"> 
+        ] 
+      } 
+    }</span><span class="s3">,</span><span class="s1"> 
+ 
+    </span><span class="s0">// The actual grunt server settings</span><span class="s1"> 
+    connect</span><span class="s4">: </span><span class="s1">{ 
+      options</span><span class="s4">: </span><span class="s1">{ 
+        port</span><span class="s4">: </span><span class="s5">9000</span><span class="s3">,</span><span class="s1"> 
+        </span><span class="s0">// Change this to '0.0.0.0' to access the server from outside.</span><span class="s1"> 
+        hostname</span><span class="s4">: </span><span class="s2">'localhost'</span><span class="s3">,</span><span class="s1"> 
+        livereload</span><span class="s4">: </span><span class="s5">35729</span><span class="s1"> 
+      }</span><span class="s3">,</span><span class="s1"> 
+      livereload</span><span class="s4">: </span><span class="s1">{ 
+        options</span><span class="s4">: </span><span class="s1">{ 
+          open</span><span class="s4">: true</span><span class="s3">,</span><span class="s1"> 
+          middleware</span><span class="s4">: function </span><span class="s1">(connect) { 
+            </span><span class="s4">return </span><span class="s1">[ 
+              connect.static(</span><span class="s2">'.tmp'</span><span class="s1">)</span><span class="s3">,</span><span class="s1"> 
+              connect().use( 
+                </span><span class="s2">'/bower_components'</span><span class="s3">,</span><span class="s1"> 
+                connect.static(</span><span class="s2">'./bower_components'</span><span class="s1">) 
+              )</span><span class="s3">,</span><span class="s1"> 
+              connect().use( 
+                </span><span class="s2">'/app/styles'</span><span class="s3">,</span><span class="s1"> 
+                connect.static(</span><span class="s2">'./app/styles'</span><span class="s1">) 
+              )</span><span class="s3">,</span><span class="s1"> 
+              connect.static(appConfig.app) 
+            ]</span><span class="s3">;</span><span class="s1"> 
+          } 
+        } 
+      }</span><span class="s3">,</span><span class="s1"> 
+      test</span><span class="s4">: </span><span class="s1">{ 
+        options</span><span class="s4">: </span><span class="s1">{ 
+          port</span><span class="s4">: </span><span class="s5">9001</span><span class="s3">,</span><span class="s1"> 
+          middleware</span><span class="s4">: function </span><span class="s1">(connect) { 
+            </span><span class="s4">return </span><span class="s1">[ 
+              connect.static(</span><span class="s2">'.tmp'</span><span class="s1">)</span><span class="s3">,</span><span class="s1"> 
+              connect.static(</span><span class="s2">'test'</span><span class="s1">)</span><span class="s3">,</span><span class="s1"> 
+              connect().use( 
+                </span><span class="s2">'/bower_components'</span><span class="s3">,</span><span class="s1"> 
+                connect.static(</span><span class="s2">'./bower_components'</span><span class="s1">) 
+              )</span><span class="s3">,</span><span class="s1"> 
+              connect.static(appConfig.app) 
+            ]</span><span class="s3">;</span><span class="s1"> 
+          } 
+        } 
+      }</span><span class="s3">,</span><span class="s1"> 
+      dist</span><span class="s4">: </span><span class="s1">{ 
+        options</span><span class="s4">: </span><span class="s1">{ 
+          open</span><span class="s4">: true</span><span class="s3">,</span><span class="s1"> 
+          base</span><span class="s4">: </span><span class="s2">'&lt;%= yeoman.dist %&gt;'</span><span class="s1"> 
+        } 
+      } 
+    }</span><span class="s3">,</span><span class="s1"> 
+ 
+    </span><span class="s0">// Make sure there are no obvious mistakes</span><span class="s1"> 
+    jshint</span><span class="s4">: </span><span class="s1">{ 
+      options</span><span class="s4">: </span><span class="s1">{ 
+        jshintrc</span><span class="s4">: </span><span class="s2">'.jshintrc'</span><span class="s3">,</span><span class="s1"> 
+        reporter</span><span class="s4">: </span><span class="s1">require(</span><span class="s2">'jshint-stylish'</span><span class="s1">) 
+      }</span><span class="s3">,</span><span class="s1"> 
+      all</span><span class="s4">: </span><span class="s1">{ 
+        src</span><span class="s4">: </span><span class="s1">[ 
+          </span><span class="s2">'Gruntfile.js'</span><span class="s3">,</span><span class="s1"> 
+          </span><span class="s2">'&lt;%= yeoman.app %&gt;/scripts/{,*/}*.js'</span><span class="s1"> 
+        ] 
+      }</span><span class="s3">,</span><span class="s1"> 
+      test</span><span class="s4">: </span><span class="s1">{ 
+        options</span><span class="s4">: </span><span class="s1">{ 
+          jshintrc</span><span class="s4">: </span><span class="s2">'test/.jshintrc'</span><span class="s1"> 
+        }</span><span class="s3">,</span><span class="s1"> 
+        src</span><span class="s4">: </span><span class="s1">[</span><span class="s2">'test/spec/{,*/}*.js'</span><span class="s1">] 
+      } 
+    }</span><span class="s3">,</span><span class="s1"> 
+ 
+    </span><span class="s0">// Make sure code styles are up to par</span><span class="s1"> 
+    jscs</span><span class="s4">: </span><span class="s1">{ 
+      options</span><span class="s4">: </span><span class="s1">{ 
+        config</span><span class="s4">: </span><span class="s2">'.jscsrc'</span><span class="s3">,</span><span class="s1"> 
+        verbose</span><span class="s4">: true</span><span class="s1"> 
+      }</span><span class="s3">,</span><span class="s1"> 
+      all</span><span class="s4">: </span><span class="s1">{ 
+        src</span><span class="s4">: </span><span class="s1">[ 
+          </span><span class="s2">'Gruntfile.js'</span><span class="s3">,</span><span class="s1"> 
+          </span><span class="s2">'&lt;%= yeoman.app %&gt;/scripts/{,*/}*.js'</span><span class="s1"> 
+        ] 
+      }</span><span class="s3">,</span><span class="s1"> 
+      test</span><span class="s4">: </span><span class="s1">{ 
+        src</span><span class="s4">: </span><span class="s1">[</span><span class="s2">'test/spec/{,*/}*.js'</span><span class="s1">] 
+      } 
+    }</span><span class="s3">,</span><span class="s1"> 
+ 
+    </span><span class="s0">// Empties folders to start fresh</span><span class="s1"> 
+    clean</span><span class="s4">: </span><span class="s1">{ 
+      dist</span><span class="s4">: </span><span class="s1">{ 
+        files</span><span class="s4">: </span><span class="s1">[{ 
+          dot</span><span class="s4">: true</span><span class="s3">,</span><span class="s1"> 
+          src</span><span class="s4">: </span><span class="s1">[ 
+            </span><span class="s2">'.tmp'</span><span class="s3">,</span><span class="s1"> 
+            </span><span class="s2">'&lt;%= yeoman.dist %&gt;/{,*/}*'</span><span class="s3">,</span><span class="s1"> 
+            </span><span class="s2">'!&lt;%= yeoman.dist %&gt;/.git{,*/}*'</span><span class="s1"> 
+          ] 
+        }] 
+      }</span><span class="s3">,</span><span class="s1"> 
+      server</span><span class="s4">: </span><span class="s2">'.tmp'</span><span class="s1"> 
+    }</span><span class="s3">,</span><span class="s1"> 
+ 
+    </span><span class="s0">// Add vendor prefixed styles</span><span class="s1"> 
+    postcss</span><span class="s4">: </span><span class="s1">{ 
+      options</span><span class="s4">: </span><span class="s1">{ 
+        processors</span><span class="s4">: </span><span class="s1">[ 
+          require(</span><span class="s2">'autoprefixer-core'</span><span class="s1">)({browsers</span><span class="s4">: </span><span class="s1">[</span><span class="s2">'last 1 version'</span><span class="s1">]}) 
+        ] 
+      }</span><span class="s3">,</span><span class="s1"> 
+      server</span><span class="s4">: </span><span class="s1">{ 
+        options</span><span class="s4">: </span><span class="s1">{ 
+          map</span><span class="s4">: true</span><span class="s1"> 
+        }</span><span class="s3">,</span><span class="s1"> 
+        files</span><span class="s4">: </span><span class="s1">[{ 
+          expand</span><span class="s4">: true</span><span class="s3">,</span><span class="s1"> 
+          cwd</span><span class="s4">: </span><span class="s2">'.tmp/styles/'</span><span class="s3">,</span><span class="s1"> 
+          src</span><span class="s4">: </span><span class="s2">'{,*/}*.css'</span><span class="s3">,</span><span class="s1"> 
+          dest</span><span class="s4">: </span><span class="s2">'.tmp/styles/'</span><span class="s1"> 
+        }] 
+      }</span><span class="s3">,</span><span class="s1"> 
+      dist</span><span class="s4">: </span><span class="s1">{ 
+        files</span><span class="s4">: </span><span class="s1">[{ 
+          expand</span><span class="s4">: true</span><span class="s3">,</span><span class="s1"> 
+          cwd</span><span class="s4">: </span><span class="s2">'.tmp/styles/'</span><span class="s3">,</span><span class="s1"> 
+          src</span><span class="s4">: </span><span class="s2">'{,*/}*.css'</span><span class="s3">,</span><span class="s1"> 
+          dest</span><span class="s4">: </span><span class="s2">'.tmp/styles/'</span><span class="s1"> 
+        }] 
+      } 
+    }</span><span class="s3">,</span><span class="s1"> 
+ 
+    </span><span class="s0">// Automatically inject Bower components into the app</span><span class="s1"> 
+    wiredep</span><span class="s4">: </span><span class="s1">{ 
+      app</span><span class="s4">: </span><span class="s1">{ 
+        src</span><span class="s4">: </span><span class="s1">[</span><span class="s2">'&lt;%= yeoman.app %&gt;/index.html'</span><span class="s1">]</span><span class="s3">,</span><span class="s1"> 
+        ignorePath</span><span class="s4">:  </span><span class="s2">/\.\.\//</span><span class="s1"> 
+      }</span><span class="s3">,</span><span class="s1"> 
+      test</span><span class="s4">: </span><span class="s1">{ 
+        devDependencies</span><span class="s4">: true</span><span class="s3">,</span><span class="s1"> 
+        src</span><span class="s4">: </span><span class="s2">'&lt;%= karma.unit.configFile %&gt;'</span><span class="s3">,</span><span class="s1"> 
+        ignorePath</span><span class="s4">:  </span><span class="s2">/\.\.\//</span><span class="s3">,</span><span class="s1"> 
+        fileTypes</span><span class="s4">:</span><span class="s1">{ 
+          js</span><span class="s4">: </span><span class="s1">{ 
+            block</span><span class="s4">: </span><span class="s2">/(([\s\t]*)\/{2}\s*?bower:\s*?(\S*))(\n|\r|.)*?(\/{2}\s*endbower)/gi</span><span class="s3">,</span><span class="s1"> 
+              detect</span><span class="s4">: </span><span class="s1">{ 
+                js</span><span class="s4">: </span><span class="s2">/'(.*\.js)'/gi</span><span class="s1"> 
+              }</span><span class="s3">,</span><span class="s1"> 
+              replace</span><span class="s4">: </span><span class="s1">{ 
+                js</span><span class="s4">: </span><span class="s2">'</span><span class="s5">\'</span><span class="s2">{{filePath}}</span><span class="s5">\'</span><span class="s2">,'</span><span class="s1"> 
+              } 
+            } 
+          } 
+      } 
+    }</span><span class="s3">,</span><span class="s1">  
+ 
+    </span><span class="s0">// Renames files for browser caching purposes</span><span class="s1"> 
+    filerev</span><span class="s4">: </span><span class="s1">{ 
+      dist</span><span class="s4">: </span><span class="s1">{ 
+        src</span><span class="s4">: </span><span class="s1">[ 
+          </span><span class="s2">'&lt;%= yeoman.dist %&gt;/scripts/{,*/}*.js'</span><span class="s3">,</span><span class="s1"> 
+          </span><span class="s2">'&lt;%= yeoman.dist %&gt;/styles/{,*/}*.css'</span><span class="s3">,</span><span class="s1"> 
+          </span><span class="s2">'&lt;%= yeoman.dist %&gt;/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'</span><span class="s3">,</span><span class="s1"> 
+          </span><span class="s2">'&lt;%= yeoman.dist %&gt;/styles/fonts/*'</span><span class="s1"> 
+        ] 
+      } 
+    }</span><span class="s3">,</span><span class="s1"> 
+ 
+    </span><span class="s0">// Reads HTML for usemin blocks to enable smart builds that automatically</span><span class="s1"> 
+    </span><span class="s0">// concat, minify and revision files. Creates configurations in memory so</span><span class="s1"> 
+    </span><span class="s0">// additional tasks can operate on them</span><span class="s1"> 
+    useminPrepare</span><span class="s4">: </span><span class="s1">{ 
+      html</span><span class="s4">: </span><span class="s2">'&lt;%= yeoman.app %&gt;/index.html'</span><span class="s3">,</span><span class="s1"> 
+      options</span><span class="s4">: </span><span class="s1">{ 
+        dest</span><span class="s4">: </span><span class="s2">'&lt;%= yeoman.dist %&gt;'</span><span class="s3">,</span><span class="s1"> 
+        flow</span><span class="s4">: </span><span class="s1">{ 
+          html</span><span class="s4">: </span><span class="s1">{ 
+            steps</span><span class="s4">: </span><span class="s1">{ 
+              js</span><span class="s4">: </span><span class="s1">[</span><span class="s2">'concat'</span><span class="s3">, </span><span class="s2">'uglifyjs'</span><span class="s1">]</span><span class="s3">,</span><span class="s1"> 
+              css</span><span class="s4">: </span><span class="s1">[</span><span class="s2">'cssmin'</span><span class="s1">] 
+            }</span><span class="s3">,</span><span class="s1"> 
+            post</span><span class="s4">: </span><span class="s1">{} 
+          } 
+        } 
+      } 
+    }</span><span class="s3">,</span><span class="s1"> 
+ 
+    </span><span class="s0">// Performs rewrites based on filerev and the useminPrepare configuration</span><span class="s1"> 
+    usemin</span><span class="s4">: </span><span class="s1">{ 
+      html</span><span class="s4">: </span><span class="s1">[</span><span class="s2">'&lt;%= yeoman.dist %&gt;/{,*/}*.html'</span><span class="s1">]</span><span class="s3">,</span><span class="s1"> 
+      css</span><span class="s4">: </span><span class="s1">[</span><span class="s2">'&lt;%= yeoman.dist %&gt;/styles/{,*/}*.css'</span><span class="s1">]</span><span class="s3">,</span><span class="s1"> 
+      js</span><span class="s4">: </span><span class="s1">[</span><span class="s2">'&lt;%= yeoman.dist %&gt;/scripts/{,*/}*.js'</span><span class="s1">]</span><span class="s3">,</span><span class="s1"> 
+      options</span><span class="s4">: </span><span class="s1">{ 
+        assetsDirs</span><span class="s4">: </span><span class="s1">[ 
+          </span><span class="s2">'&lt;%= yeoman.dist %&gt;'</span><span class="s3">,</span><span class="s1"> 
+          </span><span class="s2">'&lt;%= yeoman.dist %&gt;/images'</span><span class="s3">,</span><span class="s1"> 
+          </span><span class="s2">'&lt;%= yeoman.dist %&gt;/styles'</span><span class="s1"> 
+        ]</span><span class="s3">,</span><span class="s1"> 
+        patterns</span><span class="s4">: </span><span class="s1">{ 
+          js</span><span class="s4">: </span><span class="s1">[[</span><span class="s2">/(images\/[^''&quot;&quot;]*\.(png|jpg|jpeg|gif|webp|svg))/g</span><span class="s3">, </span><span class="s2">'Replacing references to images'</span><span class="s1">]] 
+        } 
+      } 
+    }</span><span class="s3">,</span><span class="s1"> 
+ 
+    </span><span class="s0">// The following *-min tasks will produce minified files in the dist folder</span><span class="s1"> 
+    </span><span class="s0">// By default, your `index.html`'s &lt;!-- Usemin block --&gt; will take care of</span><span class="s1"> 
+    </span><span class="s0">// minification. These next options are pre-configured if you do not wish</span><span class="s1"> 
+    </span><span class="s0">// to use the Usemin blocks.</span><span class="s1"> 
+    </span><span class="s0">// cssmin: {</span><span class="s1"> 
+    </span><span class="s0">//   dist: {</span><span class="s1"> 
+    </span><span class="s0">//     files: {</span><span class="s1"> 
+    </span><span class="s0">//       '&lt;%= yeoman.dist %&gt;/styles/main.css': [</span><span class="s1"> 
+    </span><span class="s0">//         '.tmp/styles/{,*/}*.css'</span><span class="s1"> 
+    </span><span class="s0">//       ]</span><span class="s1"> 
+    </span><span class="s0">//     }</span><span class="s1"> 
+    </span><span class="s0">//   }</span><span class="s1"> 
+    </span><span class="s0">// },</span><span class="s1"> 
+    </span><span class="s0">// uglify: {</span><span class="s1"> 
+    </span><span class="s0">//   dist: {</span><span class="s1"> 
+    </span><span class="s0">//     files: {</span><span class="s1"> 
+    </span><span class="s0">//       '&lt;%= yeoman.dist %&gt;/scripts/scripts.js': [</span><span class="s1"> 
+    </span><span class="s0">//         '&lt;%= yeoman.dist %&gt;/scripts/scripts.js'</span><span class="s1"> 
+    </span><span class="s0">//       ]</span><span class="s1"> 
+    </span><span class="s0">//     }</span><span class="s1"> 
+    </span><span class="s0">//   }</span><span class="s1"> 
+    </span><span class="s0">// },</span><span class="s1"> 
+    </span><span class="s0">// concat: {</span><span class="s1"> 
+    </span><span class="s0">//   dist: {}</span><span class="s1"> 
+    </span><span class="s0">// },</span><span class="s1"> 
+ 
+    imagemin</span><span class="s4">: </span><span class="s1">{ 
+      dist</span><span class="s4">: </span><span class="s1">{ 
+        files</span><span class="s4">: </span><span class="s1">[{ 
+          expand</span><span class="s4">: true</span><span class="s3">,</span><span class="s1"> 
+          cwd</span><span class="s4">: </span><span class="s2">'&lt;%= yeoman.app %&gt;/images'</span><span class="s3">,</span><span class="s1"> 
+          src</span><span class="s4">: </span><span class="s2">'{,*/}*.{png,jpg,jpeg,gif}'</span><span class="s3">,</span><span class="s1"> 
+          dest</span><span class="s4">: </span><span class="s2">'&lt;%= yeoman.dist %&gt;/images'</span><span class="s1"> 
+        }] 
+      } 
+    }</span><span class="s3">,</span><span class="s1"> 
+ 
+    svgmin</span><span class="s4">: </span><span class="s1">{ 
+      dist</span><span class="s4">: </span><span class="s1">{ 
+        files</span><span class="s4">: </span><span class="s1">[{ 
+          expand</span><span class="s4">: true</span><span class="s3">,</span><span class="s1"> 
+          cwd</span><span class="s4">: </span><span class="s2">'&lt;%= yeoman.app %&gt;/images'</span><span class="s3">,</span><span class="s1"> 
+          src</span><span class="s4">: </span><span class="s2">'{,*/}*.svg'</span><span class="s3">,</span><span class="s1"> 
+          dest</span><span class="s4">: </span><span class="s2">'&lt;%= yeoman.dist %&gt;/images'</span><span class="s1"> 
+        }] 
+      } 
+    }</span><span class="s3">,</span><span class="s1"> 
+ 
+    htmlmin</span><span class="s4">: </span><span class="s1">{ 
+      dist</span><span class="s4">: </span><span class="s1">{ 
+        options</span><span class="s4">: </span><span class="s1">{ 
+          collapseWhitespace</span><span class="s4">: true</span><span class="s3">,</span><span class="s1"> 
+          conservativeCollapse</span><span class="s4">: true</span><span class="s3">,</span><span class="s1"> 
+          collapseBooleanAttributes</span><span class="s4">: true</span><span class="s3">,</span><span class="s1"> 
+          removeCommentsFromCDATA</span><span class="s4">: true</span><span class="s1"> 
+        }</span><span class="s3">,</span><span class="s1"> 
+        files</span><span class="s4">: </span><span class="s1">[{ 
+          expand</span><span class="s4">: true</span><span class="s3">,</span><span class="s1"> 
+          cwd</span><span class="s4">: </span><span class="s2">'&lt;%= yeoman.dist %&gt;'</span><span class="s3">,</span><span class="s1"> 
+          src</span><span class="s4">: </span><span class="s1">[</span><span class="s2">'*.html'</span><span class="s1">]</span><span class="s3">,</span><span class="s1"> 
+          dest</span><span class="s4">: </span><span class="s2">'&lt;%= yeoman.dist %&gt;'</span><span class="s1"> 
+        }] 
+      } 
+    }</span><span class="s3">,</span><span class="s1"> 
+ 
+    ngtemplates</span><span class="s4">: </span><span class="s1">{ 
+      dist</span><span class="s4">: </span><span class="s1">{ 
+        options</span><span class="s4">: </span><span class="s1">{ 
+          module</span><span class="s4">: </span><span class="s2">'lovepopPbApp'</span><span class="s3">,</span><span class="s1"> 
+          htmlmin</span><span class="s4">: </span><span class="s2">'&lt;%= htmlmin.dist.options %&gt;'</span><span class="s3">,</span><span class="s1"> 
+          usemin</span><span class="s4">: </span><span class="s2">'scripts/scripts.js'</span><span class="s1"> 
+        }</span><span class="s3">,</span><span class="s1"> 
+        cwd</span><span class="s4">: </span><span class="s2">'&lt;%= yeoman.app %&gt;'</span><span class="s3">,</span><span class="s1"> 
+        src</span><span class="s4">: </span><span class="s2">'views/{,*/}*.html'</span><span class="s3">,</span><span class="s1"> 
+        dest</span><span class="s4">: </span><span class="s2">'.tmp/templateCache.js'</span><span class="s1"> 
+      } 
+    }</span><span class="s3">,</span><span class="s1"> 
+ 
+    </span><span class="s0">// ng-annotate tries to make the code safe for minification automatically</span><span class="s1"> 
+    </span><span class="s0">// by using the Angular long form for dependency injection.</span><span class="s1"> 
+    ngAnnotate</span><span class="s4">: </span><span class="s1">{ 
+      dist</span><span class="s4">: </span><span class="s1">{ 
+        files</span><span class="s4">: </span><span class="s1">[{ 
+          expand</span><span class="s4">: true</span><span class="s3">,</span><span class="s1"> 
+          cwd</span><span class="s4">: </span><span class="s2">'.tmp/concat/scripts'</span><span class="s3">,</span><span class="s1"> 
+          src</span><span class="s4">: </span><span class="s2">'*.js'</span><span class="s3">,</span><span class="s1"> 
+          dest</span><span class="s4">: </span><span class="s2">'.tmp/concat/scripts'</span><span class="s1"> 
+        }] 
+      } 
+    }</span><span class="s3">,</span><span class="s1"> 
+ 
+    </span><span class="s0">// Replace Google CDN references</span><span class="s1"> 
+    cdnify</span><span class="s4">: </span><span class="s1">{ 
+      dist</span><span class="s4">: </span><span class="s1">{ 
+        html</span><span class="s4">: </span><span class="s1">[</span><span class="s2">'&lt;%= yeoman.dist %&gt;/*.html'</span><span class="s1">] 
+      } 
+    }</span><span class="s3">,</span><span class="s1"> 
+ 
+    </span><span class="s0">// Copies remaining files to places other tasks can use</span><span class="s1"> 
+    copy</span><span class="s4">: </span><span class="s1">{ 
+      dist</span><span class="s4">: </span><span class="s1">{ 
+        files</span><span class="s4">: </span><span class="s1">[{ 
+          expand</span><span class="s4">: true</span><span class="s3">,</span><span class="s1"> 
+          dot</span><span class="s4">: true</span><span class="s3">,</span><span class="s1"> 
+          cwd</span><span class="s4">: </span><span class="s2">'&lt;%= yeoman.app %&gt;'</span><span class="s3">,</span><span class="s1"> 
+          dest</span><span class="s4">: </span><span class="s2">'&lt;%= yeoman.dist %&gt;'</span><span class="s3">,</span><span class="s1"> 
+          src</span><span class="s4">: </span><span class="s1">[ 
+            </span><span class="s2">'*.{ico,png,txt}'</span><span class="s3">,</span><span class="s1"> 
+            </span><span class="s2">'*.html'</span><span class="s3">,</span><span class="s1"> 
+            </span><span class="s2">'images/{,*/}*.{webp}'</span><span class="s3">,</span><span class="s1"> 
+            </span><span class="s2">'styles/fonts/{,*/}*.*'</span><span class="s1"> 
+          ] 
+        }</span><span class="s3">, </span><span class="s1">{ 
+          expand</span><span class="s4">: true</span><span class="s3">,</span><span class="s1"> 
+          cwd</span><span class="s4">: </span><span class="s2">'.tmp/images'</span><span class="s3">,</span><span class="s1"> 
+          dest</span><span class="s4">: </span><span class="s2">'&lt;%= yeoman.dist %&gt;/images'</span><span class="s3">,</span><span class="s1"> 
+          src</span><span class="s4">: </span><span class="s1">[</span><span class="s2">'generated/*'</span><span class="s1">] 
+        }</span><span class="s3">, </span><span class="s1">{ 
+          expand</span><span class="s4">: true</span><span class="s3">,</span><span class="s1"> 
+          cwd</span><span class="s4">: </span><span class="s2">'bower_components/bootstrap/dist'</span><span class="s3">,</span><span class="s1"> 
+          src</span><span class="s4">: </span><span class="s2">'fonts/*'</span><span class="s3">,</span><span class="s1"> 
+          dest</span><span class="s4">: </span><span class="s2">'&lt;%= yeoman.dist %&gt;'</span><span class="s1"> 
+        }] 
+      }</span><span class="s3">,</span><span class="s1"> 
+      styles</span><span class="s4">: </span><span class="s1">{ 
+        expand</span><span class="s4">: true</span><span class="s3">,</span><span class="s1"> 
+        cwd</span><span class="s4">: </span><span class="s2">'&lt;%= yeoman.app %&gt;/styles'</span><span class="s3">,</span><span class="s1"> 
+        dest</span><span class="s4">: </span><span class="s2">'.tmp/styles/'</span><span class="s3">,</span><span class="s1"> 
+        src</span><span class="s4">: </span><span class="s2">'{,*/}*.css'</span><span class="s1"> 
+      } 
+    }</span><span class="s3">,</span><span class="s1"> 
+ 
+    </span><span class="s0">// Run some tasks in parallel to speed up the build process</span><span class="s1"> 
+    concurrent</span><span class="s4">: </span><span class="s1">{ 
+      server</span><span class="s4">: </span><span class="s1">[ 
+        </span><span class="s2">'copy:styles'</span><span class="s1"> 
+      ]</span><span class="s3">,</span><span class="s1"> 
+      test</span><span class="s4">: </span><span class="s1">[ 
+        </span><span class="s2">'copy:styles'</span><span class="s1"> 
+      ]</span><span class="s3">,</span><span class="s1"> 
+      dist</span><span class="s4">: </span><span class="s1">[ 
+        </span><span class="s2">'copy:styles'</span><span class="s3">,</span><span class="s1"> 
+        </span><span class="s2">'imagemin'</span><span class="s3">,</span><span class="s1"> 
+        </span><span class="s2">'svgmin'</span><span class="s1"> 
+      ] 
+    }</span><span class="s3">,</span><span class="s1"> 
+ 
+    </span><span class="s0">// Test settings</span><span class="s1"> 
+    karma</span><span class="s4">: </span><span class="s1">{ 
+      unit</span><span class="s4">: </span><span class="s1">{ 
+        configFile</span><span class="s4">: </span><span class="s2">'test/karma.conf.js'</span><span class="s3">,</span><span class="s1"> 
+        singleRun</span><span class="s4">: true</span><span class="s1"> 
+      } 
+    } 
+  })</span><span class="s3">;</span><span class="s1"> 
+ 
+ 
+  grunt.registerTask(</span><span class="s2">'serve'</span><span class="s3">, </span><span class="s2">'Compile then start a connect web server'</span><span class="s3">, </span><span class="s4">function </span><span class="s1">(target) { 
+    </span><span class="s4">if </span><span class="s1">(target </span><span class="s4">=== </span><span class="s2">'dist'</span><span class="s1">) { 
+      </span><span class="s4">return </span><span class="s1">grunt.task.run([</span><span class="s2">'build'</span><span class="s3">, </span><span class="s2">'connect:dist:keepalive'</span><span class="s1">])</span><span class="s3">;</span><span class="s1"> 
+    } 
+ 
+    grunt.task.run([ 
+      </span><span class="s2">'clean:server'</span><span class="s3">,</span><span class="s1"> 
+      </span><span class="s2">'wiredep'</span><span class="s3">,</span><span class="s1"> 
+      </span><span class="s2">'concurrent:server'</span><span class="s3">,</span><span class="s1"> 
+      </span><span class="s2">'postcss:server'</span><span class="s3">,</span><span class="s1"> 
+      </span><span class="s2">'connect:livereload'</span><span class="s3">,</span><span class="s1"> 
+      </span><span class="s2">'watch'</span><span class="s1"> 
+    ])</span><span class="s3">;</span><span class="s1"> 
+  })</span><span class="s3">;</span><span class="s1"> 
+ 
+  grunt.registerTask(</span><span class="s2">'server'</span><span class="s3">, </span><span class="s2">'DEPRECATED TASK. Use the &quot;serve&quot; task instead'</span><span class="s3">, </span><span class="s4">function </span><span class="s1">(target) { 
+    grunt.log.warn(</span><span class="s2">'The `server` task has been deprecated. Use `grunt serve` to start a server.'</span><span class="s1">)</span><span class="s3">;</span><span class="s1"> 
+    grunt.task.run([</span><span class="s2">'serve:' </span><span class="s4">+ </span><span class="s1">target])</span><span class="s3">;</span><span class="s1"> 
+  })</span><span class="s3">;</span><span class="s1"> 
+ 
+  grunt.registerTask(</span><span class="s2">'test'</span><span class="s3">, </span><span class="s1">[ 
+    </span><span class="s2">'clean:server'</span><span class="s3">,</span><span class="s1"> 
+    </span><span class="s2">'wiredep'</span><span class="s3">,</span><span class="s1"> 
+    </span><span class="s2">'concurrent:test'</span><span class="s3">,</span><span class="s1"> 
+    </span><span class="s2">'postcss'</span><span class="s3">,</span><span class="s1"> 
+    </span><span class="s2">'connect:test'</span><span class="s3">,</span><span class="s1"> 
+    </span><span class="s2">'karma'</span><span class="s1"> 
+  ])</span><span class="s3">;</span><span class="s1"> 
+ 
+  grunt.registerTask(</span><span class="s2">'build'</span><span class="s3">, </span><span class="s1">[ 
+    </span><span class="s2">'clean:dist'</span><span class="s3">,</span><span class="s1"> 
+    </span><span class="s2">'wiredep'</span><span class="s3">,</span><span class="s1"> 
+    </span><span class="s2">'useminPrepare'</span><span class="s3">,</span><span class="s1"> 
+    </span><span class="s2">'concurrent:dist'</span><span class="s3">,</span><span class="s1"> 
+    </span><span class="s2">'postcss'</span><span class="s3">,</span><span class="s1"> 
+    </span><span class="s2">'ngtemplates'</span><span class="s3">,</span><span class="s1"> 
+    </span><span class="s2">'concat'</span><span class="s3">,</span><span class="s1"> 
+    </span><span class="s2">'ngAnnotate'</span><span class="s3">,</span><span class="s1"> 
+    </span><span class="s2">'copy:dist'</span><span class="s3">,</span><span class="s1"> 
+    </span><span class="s2">'cdnify'</span><span class="s3">,</span><span class="s1"> 
+    </span><span class="s2">'cssmin'</span><span class="s3">,</span><span class="s1"> 
+    </span><span class="s2">'uglify'</span><span class="s3">,</span><span class="s1"> 
+    </span><span class="s2">'filerev'</span><span class="s3">,</span><span class="s1"> 
+    </span><span class="s2">'usemin'</span><span class="s3">,</span><span class="s1"> 
+    </span><span class="s2">'htmlmin'</span><span class="s1"> 
+  ])</span><span class="s3">;</span><span class="s1"> 
+ 
+  grunt.registerTask(</span><span class="s2">'default'</span><span class="s3">, </span><span class="s1">[ 
+    </span><span class="s2">'newer:jshint'</span><span class="s3">,</span><span class="s1"> 
+    </span><span class="s2">'newer:jscs'</span><span class="s3">,</span><span class="s1"> 
+    </span><span class="s2">'test'</span><span class="s3">,</span><span class="s1"> 
+    </span><span class="s2">'build'</span><span class="s1"> 
+  ])</span><span class="s3">;</span><span class="s1"> 
+}</span><span class="s3">;</span><span class="s1"> 
+</span></pre>
+</body>
+</html>
